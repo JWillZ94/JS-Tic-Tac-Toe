@@ -7,25 +7,55 @@
   <link rel="stylesheet" href="styles.css">
   <title>JS Tic-Tac-Toe</title>
 </head>
-<body onload="chooseSide()">
-  <div id="choose">
-    <div id="choose-content">
-      <p>Choose a side</p>
-      <button id="x-btn">X</button>
-      <button id="o-btn">O</button>
+<body>
+  <div class="container">
+
+    <div class="content scoreboard">
+      <div>
+        <h2>Player</h2>
+        <h2 id="playerChar">#</h2>
+      </div>
+      <div>
+        <h2>Computer</h2>
+        <h2 id="computerChar">#</h2>
+      </div>
     </div>
-  </div>
-  <h1 id="title">JavaScript Tic-Tac-Toe</h1>
-  <div id="board">
-    <div id="top-left" class="square top-row"></div>
-    <div id="top-center" class="square top-row"></div>
-    <div id="top-right" class="square top-row"></div>
-    <div id="middle-left" class="square middle-row"></div>
-    <div id="middle-center" class="square middle-row"></div>
-    <div id="middle-right" class="square middle-row"></div>
-    <div id="bottom-left" class="square bottom-row"></div>
-    <div id="bottom-center" class="square bottom-row"></div>
-    <div id="bottom-right" class="square bottom-row"></div>
+
+    <div class="grid content">
+      <div id="rowOne" class="row">
+        <div id="c0" class="cell"></div>
+        <div id="c1" class="cell"></div>
+        <div id="c2" class="cell"></div>
+      </div>
+      <div id="rowTwo" class="row">
+        <div id="c3" class="cell"></div>
+        <div id="c4" class="cell"></div>
+        <div id="c5" class="cell"></div>
+      </div>
+      <div id="rowThree" class="row">
+        <div id="c6" class="cell"></div>
+        <div id="c7" class="cell"></div>
+        <div id="c8" class="cell"></div>
+      </div>
+    </div>
+
+    <div id="winner-msg" class="content align-center win-msg"></div>
+
+    <div class="content welcome">
+      <div class="content align-center">
+        <h2>Choose Player</h2>
+        <button id="playerX">X</button>
+        <button id="playerO">O</button>
+      </div>
+    </div>
+
+    <div class="content align-center">
+      <button id="reset">Reset Game</button>
+    </div>
+
+
+
+
   </div>
 
   <script src="main.js"></script>
