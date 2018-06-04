@@ -1,5 +1,7 @@
 body{
   font-family: 'Lato', sans-serif;
+  color: red;
+  background: #262626;
 }
 
 .container {
@@ -53,24 +55,46 @@ button:active {
 }
 
 .row {
-  display:flex;
-
+  display: flex;
 }
 
 .row > div {
   width:130px;
   height:130px;
-  background-color:rgb(156, 222, 125);
+  background: red;
   cursor:pointer;
-  margin:1px;
-  border-radius:3px;
-  display:flex;
+  margin: 8px;
+  border-radius: 8px;
+  display: flex;
   justify-content:center;
   flex-direction:column;
   font-size:72px;
   color:white;
+  animation-name: float1;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
 }
 
 .win-msg {
   height:30px;
+}
+
+/* Animations ============================== */
+
+@keyframes float1 {
+  0% {
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
+  25% {
+    transform: rotate3d(10, 10, 10, 10deg);
+  }
+  50% {
+    transform: rotate3d(20, 20, 20, 20deg);
+  }
+  75% {
+    transform: rotate3d(10, 10, 10, 10deg);
+  }
+  100% {
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
 }

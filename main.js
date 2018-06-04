@@ -1,4 +1,5 @@
 var grid = document.querySelector('.grid');
+var row = document.getElementsByClassName('row');
 var cells = document.getElementsByClassName('cell');
 var playerSelect = document.querySelector('.welcome');
 var scoreboard = document.querySelector('.scoreboard');
