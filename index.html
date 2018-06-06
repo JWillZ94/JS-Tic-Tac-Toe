@@ -7,21 +7,29 @@
   <link rel="stylesheet" href="styles.css">
   <title>JS Tic-Tac-Toe</title>
 </head>
-<body>
+<body onload="chooseSide()">
   <div class="container">
 
-    <div class="content scoreboard">
-      <div>
-        <h2>Player</h2>
-        <h2 id="playerChar">#</h2>
-      </div>
-      <div>
-        <h2>Computer</h2>
-        <h2 id="computerChar">#</h2>
-      </div>
+    <p class="align-center" id="title">JavaScript Tic-Tac-Toe</p>
+
+    <div class="scoreboard">
+      <p>Player: <span id="playerChar">?</span></p>
+      <p>Computer: <span id="computerChar">?</span></p>
     </div>
 
-    <div class="grid content">
+    <div class="scoreboard">
+      <p>Player Wins: <span id="player-wins"></span></p>
+      <p>Computer Wins: <span id="computer-wins"></span></p>
+      <p>Draws: <span id="draws"></span></p>
+    </div>
+
+    <div id="winner-msg" class="align-center win-msg"></div>
+
+    <div class="align-center">
+      <button id="reset">Reset Game</button>
+    </div>
+
+    <div class="grid">
       <div id="rowOne" class="row">
         <div id="c0" class="cell"></div>
         <div id="c1" class="cell"></div>
@@ -39,22 +47,13 @@
       </div>
     </div>
 
-    <div id="winner-msg" class="content align-center win-msg"></div>
-
-    <div class="content welcome">
-      <div class="content align-center">
+    <div class="welcome">
+      <div class="align-center welcome-content">
         <h2>Choose Player</h2>
         <button id="playerX">X</button>
         <button id="playerO">O</button>
       </div>
     </div>
-
-    <div class="content align-center">
-      <button id="reset">Reset Game</button>
-    </div>
-
-
-
 
   </div>
 

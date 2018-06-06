@@ -5,9 +5,15 @@ var playerSelect = document.querySelector('.welcome');
 var scoreboard = document.querySelector('.scoreboard');
 var reset = document.getElementById('reset');
 var winnerMsg = document.getElementById('winner-msg');
+var playerWins = document.getElementById('player-wins');
+var computerWins = document.getElementById('computer-wins');
+var draws = document.getElementById('draws');
 
 var player = "";
 var computer = "";
+var playerWinsNum = 0;
+var computerWinsNum = 0;
+var drawsNum = 0;
 var gameOn = false;
 var moves = 0;
 var validMoves;
@@ -40,6 +46,14 @@ var wins = [
   [2, 4, 6]
 ];
 
+playerWins.innerHTML = playerWinsNum++;
+computerWins.innerHTML = computerWinsNum++;
+draws.innerHTML = drawsNum++;
+
+function chooseSide() {
+  playerSelect.style.display = 'block';
+}
+
 // choose player
 playerSelect.addEventListener('click', choosePlayer, false);
 
@@ -56,6 +70,8 @@ function choosePlayer(e) {
       player = playerChar.innerHTML = player = "O";
       computer = computerChar.innerHTML = "X";
     }
+
+    playerSelect.style.display = "none";
   }
 }
 
@@ -63,27 +79,26 @@ function choosePlayer(e) {
 grid.addEventListener('click', updateBoard, false);
 
 function updateBoard(e) {
-  if (e.target.className === "cell" ) {
+  if (e.target.className === "cell" && gameOn === true) {
     if (e.target.innerHTML !== player && e.target.innerHTML !== computer) {
 
       e.target.innerHTML = player;
-
 
       syncBoard();
 
       moves++;
 
-      console.log('Player Moves:', playerMoves());
+      playerMoves();
 
-      console.log("Valid Moves Before:", validMoves());
+      validMoves();
 
       computerChoose();
 
       computerPlay();
 
-      console.log("Computer Moves:", computerMoves());
+      computerMoves();
 
-      console.log("Valid Moves After:", validMoves());
+      validMoves();
 
       declareWinner();
 
@@ -182,7 +197,7 @@ function computerMoves() {
   return idx;
 }
 
-// analyze the board to determine a pick winner
+// analyze the board to determine a winner
 function winner(gameBoard, move) {
 
   if (
@@ -209,11 +224,15 @@ function declareWinner() {
     if (winner(board, player)) {
       winnerMsg.innerHTML = "<h2>Player wins!</h2>";
       gameOn = false;
+      playerWins.innerHTML = playerWinsNum++;
     } else if (winner(board, computer)) {
       winnerMsg.innerHTML = "<h2>Computer wins!</h2>";
       gameOn = false;
+      computerWins.innerHTML = computerWinsNum++;
     } else if (validMoves().length === 0) {
       winnerMsg.innerHTML = "<h2>It's a draw!</h2>";
+      gameOn = false;
+      draws.innerHTML = drawsNum++;
     }
   }
 }
@@ -231,11 +250,14 @@ reset.addEventListener('click', function() {
 
   ];
 
-  cells.forEach(function(cell) {
+  for (let cell of cells) {
     cell.innerHTML = "";
-  });
+  }
 
   winnerMsg.innerHTML = "";
 
+  gameOn = false;
+
+  chooseSide();
 
 }, false);
