@@ -1,14 +1,31 @@
 body{
   font-family: 'Lato', sans-serif;
-  color: red;
+  color: #e94b3c;
   background: #262626;
 }
 
 .container {
-  width:400px;
+  max-width: 400px;
   margin-left:auto;
   margin-right:auto;
-  padding-top:2rem;
+}
+
+#title {
+  font-size: 3em;
+  margin: 4rem 0 2rem 0;
+}
+
+#side {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+#count {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.win-msg {
+  height: 30px;
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 .align-center {
@@ -17,11 +34,12 @@ body{
 
 button {
   padding: 5px 10px 5px 10px;
-  border-radius:3px;
+  border-radius: 5px;
   outline: none;
   cursor: pointer;
   transition-duration: 0.4s;
   -webkit-transition-duration: 0.4s;
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 button:active {
@@ -54,14 +72,20 @@ button:active {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  border-radius: 15px;
+  width: 20%;
+}
+
+.btn {
+  margin: 1rem;
+  border-radius: 5px;
 }
 
 /* CSS for game board */
 
 .grid {
   text-align:center;
-  margin-bottom:2rem;
+  margin: 1rem 0 3rem 0;
 }
 
 .row {
@@ -71,7 +95,7 @@ button:active {
 .row > div {
   width:130px;
   height:130px;
-  background: red;
+  background: #e94b3c;
   cursor:pointer;
   margin: 8px;
   border-radius: 8px;
@@ -104,10 +128,6 @@ button:active {
   animation-name: float3;
   animation-duration: 50s;
   animation-iteration-count: infinite;
-}
-
-.win-msg {
-  height:30px;
 }
 
 /* Animations ============================== */
@@ -167,5 +187,5 @@ button:active {
 }
 
 @keyframes addOne {
-  
+
 }

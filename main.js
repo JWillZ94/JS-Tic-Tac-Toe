@@ -147,11 +147,9 @@ function computerChoose() {
 
     for (var j = 0; j < wins.length; j++) {
       if (wins[j].every(e => computerMovesNext.indexOf(e) > -1)) {
-        console.log("COMP WIN", nextMove);
         compWin = nextMove;
       }
       if (wins[j].every(e => playerMovesNext.indexOf(e) > -1)) {
-        console.log("COMP BLOCK", nextMove);
         compBlock = nextMove;
       }
     }
@@ -222,15 +220,15 @@ function declareWinner() {
 
   if (gameOn === true) {
     if (winner(board, player)) {
-      winnerMsg.innerHTML = "<h2>Player wins!</h2>";
+      winnerMsg.innerHTML = "Player wins!";
       gameOn = false;
       playerWins.innerHTML = playerWinsNum++;
     } else if (winner(board, computer)) {
-      winnerMsg.innerHTML = "<h2>Computer wins!</h2>";
+      winnerMsg.innerHTML = "Computer wins!";
       gameOn = false;
       computerWins.innerHTML = computerWinsNum++;
     } else if (validMoves().length === 0) {
-      winnerMsg.innerHTML = "<h2>It's a draw!</h2>";
+      winnerMsg.innerHTML = "It's a draw!";
       gameOn = false;
       draws.innerHTML = drawsNum++;
     }

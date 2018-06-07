@@ -8,25 +8,25 @@
   <title>JS Tic-Tac-Toe</title>
 </head>
 <body onload="chooseSide()">
+  <p class="align-center" id="title">JavaScript Tic-Tac-Toe</p>
+
   <div class="container">
 
-    <p class="align-center" id="title">JavaScript Tic-Tac-Toe</p>
-
-    <div class="scoreboard">
-      <p>Player: <span id="playerChar">?</span></p>
-      <p>Computer: <span id="computerChar">?</span></p>
-    </div>
-
-    <div class="scoreboard">
+    <div id="count" class="scoreboard">
       <p>Player Wins: <span id="player-wins"></span></p>
       <p>Computer Wins: <span id="computer-wins"></span></p>
       <p>Draws: <span id="draws"></span></p>
     </div>
 
-    <div id="winner-msg" class="align-center win-msg"></div>
+    <h2 id="winner-msg" class="align-center win-msg"></h2>
 
     <div class="align-center">
       <button id="reset">Reset Game</button>
+    </div>
+
+    <div id="side" class="scoreboard">
+      <p>Player: <span id="playerChar">?</span></p>
+      <p>Computer: <span id="computerChar">?</span></p>
     </div>
 
     <div class="grid">
@@ -49,9 +49,9 @@
 
     <div class="welcome">
       <div class="align-center welcome-content">
-        <h2>Choose Player</h2>
-        <button id="playerX">X</button>
-        <button id="playerO">O</button>
+        <h2>Choose Side</h2>
+        <button class="btn" id="playerX">X</button>
+        <button class="btn" id="playerO">O</button>
       </div>
     </div>
 
