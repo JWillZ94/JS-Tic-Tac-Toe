@@ -169,18 +169,80 @@ function computerPlay() {
   // for (var i = 0; i < len; i++) {
 
 
-  if (board[4] === 4) {
-    board[4] = cells[4].innerHTML = computer;
+  if (board[4] === 4) { // com starts middle
+    setTimeout(() => {
+      board[4] = cells[4].innerHTML = computer;
+    }, 1000);
   }
-  else if (board[4] === player && board[0] !== computer) {
-    board[0] = cells[0].innerHTML = computer;
+  else if (board[4] === player && board[0] !== computer) { // if player chose middle, com starts top left
+    setTimeout(() => {
+      board[0] = cells[0].innerHTML = computer;
+    }, 1000);
   }
-  else if (board[compBlock] !== player && board[compBlock] !== computer && board[compBlock] !== undefined) {
-    board[compBlock] = cells[compBlock].innerHTML = computer;
+  else if (board[compBlock] !== player && board[compBlock] !== computer && board[compBlock] !== undefined) { // chooses open spot
+    setTimeout(() => {
+      board[compBlock] = cells[compBlock].innerHTML = computer;
+    }, 1000);
   }
-  else if (board[rand] !== undefined) {
-    board[rand] = cells[rand].innerHTML = computer;
+  else if (board[rand] !== undefined) { // chooses random spot
+    setTimeout(() => {
+      board[rand] = cells[rand].innerHTML = computer;
+    }, 1000);
   }
+
+  // Minimax algorithm
+
+  // function score(n, depth) {
+  //   if (n == 1) {
+  //     return 100 - depth;
+  //   } else if (n == 0) {
+  //     return -100 + depth;
+  //   } else if (n == 2) {
+  //     return 0;
+  //   }
+  // }
+  //
+  // function minimax(validMoves(), depth) {
+  //   var bestMove = validMoves()[0];
+  //   var bestScore = -1000;
+  //   validMoves().forEach(move => {
+  //     // makeMove()
+  //     let score = min(validMoves(), depth++);
+  //     if (score > bestScore) {
+  //       bestMove = move;
+  //       bestScore = score;
+  //     }
+  //   });
+  //   return bestMove;
+  // }
+  //
+  // function max(validMoves(), depth) {
+  //   let bestScore = -1000;
+  //   let bestMove;
+  //   validMoves().forEach(move => {
+  //     // makeMove()
+  //     let score = min(validMoves(), depth++);
+  //     if (score > bestScore) {
+  //       bestScore = score;
+  //       bestMove = move;
+  //     }
+  //   });
+  //   return bestScore;
+  // }
+  //
+  // function min(validMoves(), depth) {
+  //   let bestScore = 1000;
+  //   let bestMove;
+  //   validMoves().forEach(move => {
+  //     // makeMove()
+  //     let score = max(validMoves(), depth++);
+  //     if (score < bestScore) {
+  //       bestScore = score;
+  //       bestMove = move;
+  //     }
+  //   });
+  //   return bestScore;
+  // }
 
   // }
 }

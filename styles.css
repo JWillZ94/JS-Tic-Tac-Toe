@@ -90,6 +90,7 @@ button:active {
 
 .row {
   display: flex;
+  justify-content: center;
 }
 
 .row > div {
@@ -186,6 +187,46 @@ button:active {
   }
 }
 
-@keyframes addOne {
+/* Responsiveness ============================= */
 
+@media (max-width: 675px) {
+  .welcome-content {
+    width: 35%;
+  }
+}
+
+@media (max-width: 500px) {
+  #title {
+    font-size: 2.5em;
+  }
+}
+
+@media (max-width: 425px) {
+  #title {
+    font-size: 2em;
+  }
+  .row > div {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 385px) {
+  .welcome-content {
+    width: 55%;
+  }
+  .row > div {
+    width: 70px;
+    height: 70px;
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 330px) {
+  #title {
+    font-size: 1.5em;
+  }
+  #count p {
+    font-size: 0.8em;
+  }
 }
