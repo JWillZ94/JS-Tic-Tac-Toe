@@ -84,23 +84,23 @@ function updateBoard(e) {
 
       e.target.innerHTML = player;
 
-      syncBoard();
+      syncBoard();  // If a cell isnt blank, update it on the board
 
-      moves++;
+      moves++;  // Add to total amount of moves
 
-      playerMoves();
+      playerMoves(); // keeps track of the player's latest move
 
-      validMoves();
+      validMoves(); // returns arr of the board w/ empty spots
 
-      computerChoose();
+      computerChoose(); // determines what the comp can choose next?
 
-      computerPlay();
+      computerPlay(); // computer makes a move depending on situation
 
-      computerMoves();
+      computerMoves(); // keeps track of the computer's latest move
 
-      validMoves();
+      validMoves(); // returns arr of the board w/ empty spots
 
-      declareWinner();
+      declareWinner(); // declares a winner based on the winner function
 
     }
 
