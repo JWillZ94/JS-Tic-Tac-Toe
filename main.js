@@ -164,10 +164,6 @@ function computerPlay() {
 
   var len = validMoves().length;
   var rand = validMoves()[Math.floor(Math.random() * len)];
-  // console.log("random move", rand);
-
-  // for (var i = 0; i < len; i++) {
-
 
   if (board[4] === 4) { // com starts middle
     setTimeout(() => {
@@ -178,44 +174,54 @@ function computerPlay() {
     setTimeout(() => {
       board[0] = cells[0].innerHTML = computer;
     }, 1000);
-  }
-  else if (board[compBlock] !== player && board[compBlock] !== computer && board[compBlock] !== undefined) { // chooses open spot
+  } else if (board[rand] !== undefined) { // chooses random spot
     setTimeout(() => {
-      board[compBlock] = cells[compBlock].innerHTML = computer;
-    }, 1000);
-  }
-  else if (board[rand] !== undefined) { // chooses random spot
-    setTimeout(() => {
-      board[rand] = cells[rand].innerHTML = computer;
+      // board[rand] = cells[rand].innerHTML = computer;
+      minimax(validMoves(), computer).index.innerHTML = computer;
     }, 1000);
   }
 
   // Minimax algorithm
 
-  // function score(n, depth) {
-  //   if (n == 1) {
-  //     return 100 - depth;
-  //   } else if (n == 0) {
-  //     return -100 + depth;
-  //   } else if (n == 2) {
-  //     return 0;
-  //   }
-  // }
-  //
-  // function minimax(validMoves(), depth) {
-  //   var bestMove = validMoves()[0];
-  //   var bestScore = -1000;
-  //   validMoves().forEach(move => {
-  //     // makeMove()
-  //     let score = min(validMoves(), depth++);
-  //     if (score > bestScore) {
-  //       bestMove = move;
-  //       bestScore = score;
-  //     }
-  //   });
-  //   return bestMove;
-  // }
-  //
+  function minimax(board, player) {
+    var moves = [];
+    for (var i = 0; i < board.length; i++) {
+      var move = {};
+      move.index = board[i];
+      board[i] = player;
+      if (player == computer) {
+        var result = minimax(validMoves(), player);
+        move.score = result.score;
+      } else {
+        var result = minimax(validMoves(), computer);
+        move.score = result.score;
+      }
+      board[i] = move.index;
+      moves.push(move);
+    }
+
+    var bestMove;
+    if (player === computer) {
+      var bestScore = -1000;
+      for (var i = 0; i < moves.length; i++) {
+        if (moves[i].score > bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    } else {
+      var bestScore = 1000;
+      for (var i = 0; i < moves.length; i++) {
+        if (moves[i].score < bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    }
+
+    return moves[bestMove];
+  }
+
   // function max(validMoves(), depth) {
   //   let bestScore = -1000;
   //   let bestMove;
@@ -244,7 +250,6 @@ function computerPlay() {
   //   return bestScore;
   // }
 
-  // }
 }
 
 // log indexes current of computer moves
@@ -283,16 +288,20 @@ function declareWinner() {
   if (gameOn === true) {
     if (winner(board, player)) {
       winnerMsg.innerHTML = "Player wins!";
+
       gameOn = false;
       playerWins.innerHTML = playerWinsNum++;
+      return { score: -10 };
     } else if (winner(board, computer)) {
       winnerMsg.innerHTML = "Computer wins!";
       gameOn = false;
       computerWins.innerHTML = computerWinsNum++;
+      return { score: 10 };
     } else if (validMoves().length === 0) {
       winnerMsg.innerHTML = "It's a draw!";
       gameOn = false;
       draws.innerHTML = drawsNum++;
+      return { score: 0 };
     }
   }
 }
