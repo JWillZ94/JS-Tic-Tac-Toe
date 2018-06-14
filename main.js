@@ -73,6 +73,7 @@ function choosePlayer(e) {
 
     playerSelect.style.display = "none";
   }
+  grid.addEventListener('click', updateBoard, false);
 }
 
 // game board functionality
@@ -80,7 +81,10 @@ grid.addEventListener('click', updateBoard, false);
 
 function updateBoard(e) {
   if (e.target.className === "cell" && gameOn === true) {
+
     if (e.target.innerHTML !== player && e.target.innerHTML !== computer) {
+
+      grid.removeEventListener('click', updateBoard, false);
 
       e.target.innerHTML = player;
 
@@ -100,7 +104,10 @@ function updateBoard(e) {
 
       validMoves(); // returns arr of the board w/ empty spots
 
-      declareWinner(); // declares a winner based on the winner function
+      if (declareWinner()) {
+        grid.removeEventListener('click', updateBoard, false);
+        declareWinner(); // declares a winner based on the winner function
+      }
 
     }
 
@@ -168,40 +175,51 @@ function computerPlay() {
   if (board[4] === 4) { // com starts middle
     setTimeout(() => {
       board[4] = cells[4].innerHTML = computer;
+      grid.addEventListener('click', updateBoard, false);
     }, 1000);
   }
   else if (board[4] === player && board[0] !== computer) { // if player chose middle, com starts top left
     setTimeout(() => {
       board[0] = cells[0].innerHTML = computer;
+      grid.addEventListener('click', updateBoard, false);
     }, 1000);
-  } else if (board[rand] !== undefined) { // chooses random spot
+  } else if (board[rand] !== undefined) { // computer chooses best spot based on minimax algorithm
     setTimeout(() => {
-      // board[rand] = cells[rand].innerHTML = computer;
-      minimax(validMoves(), computer).index.innerHTML = computer;
+      board[minimax(board, computer).index] = cells[minimax(board, computer).index].innerHTML = computer;
+      declareWinner();
+      grid.addEventListener('click', updateBoard, false);
     }, 1000);
   }
 
   // Minimax algorithm
 
-  function minimax(board, player) {
+  function minimax(board, turn) {
+    var availSpots = validMoves();
+    if (winner(board, player)) {
+      return { score: -10 };
+    } else if (winner(board, computer)) {
+      return { score: 10 };
+    } else if (availSpots.length === 0) {
+      return { score: 0 };
+    }
     var moves = [];
-    for (var i = 0; i < board.length; i++) {
+    for (var i = 0; i < availSpots.length; i++) {
       var move = {};
-      move.index = board[i];
-      board[i] = player;
-      if (player == computer) {
-        var result = minimax(validMoves(), player);
+      move.index = board[availSpots[i]]; // the next empty spot
+      board[availSpots[i]] = turn; // the next empty spot will become the comp's spot
+      if (turn == computer) {
+        var result = minimax(board, player);
         move.score = result.score;
       } else {
-        var result = minimax(validMoves(), computer);
+        var result = minimax(board, computer);
         move.score = result.score;
       }
-      board[i] = move.index;
-      moves.push(move);
+      board[availSpots[i]] = move.index; // resets spot to empty
+      moves.push(move); // push the move object to the array
     }
 
     var bestMove;
-    if (player === computer) {
+    if (turn === computer) {
       var bestScore = -1000;
       for (var i = 0; i < moves.length; i++) {
         if (moves[i].score > bestScore) {
@@ -221,34 +239,6 @@ function computerPlay() {
 
     return moves[bestMove];
   }
-
-  // function max(validMoves(), depth) {
-  //   let bestScore = -1000;
-  //   let bestMove;
-  //   validMoves().forEach(move => {
-  //     // makeMove()
-  //     let score = min(validMoves(), depth++);
-  //     if (score > bestScore) {
-  //       bestScore = score;
-  //       bestMove = move;
-  //     }
-  //   });
-  //   return bestScore;
-  // }
-  //
-  // function min(validMoves(), depth) {
-  //   let bestScore = 1000;
-  //   let bestMove;
-  //   validMoves().forEach(move => {
-  //     // makeMove()
-  //     let score = max(validMoves(), depth++);
-  //     if (score < bestScore) {
-  //       bestScore = score;
-  //       bestMove = move;
-  //     }
-  //   });
-  //   return bestScore;
-  // }
 
 }
 
@@ -288,20 +278,16 @@ function declareWinner() {
   if (gameOn === true) {
     if (winner(board, player)) {
       winnerMsg.innerHTML = "Player wins!";
-
       gameOn = false;
       playerWins.innerHTML = playerWinsNum++;
-      return { score: -10 };
     } else if (winner(board, computer)) {
       winnerMsg.innerHTML = "Computer wins!";
       gameOn = false;
       computerWins.innerHTML = computerWinsNum++;
-      return { score: 10 };
     } else if (validMoves().length === 0) {
       winnerMsg.innerHTML = "It's a draw!";
       gameOn = false;
       draws.innerHTML = drawsNum++;
-      return { score: 0 };
     }
   }
 }
